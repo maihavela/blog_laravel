@@ -13,10 +13,22 @@
 
 Route::get('about', 'PagesController@about');
 Route::get('contact', 'PagesController@contact');
-Route::get('articles', 'ArticlesController@index');
-Route::get('articles/create', 'ArticlesController@create');
-Route::post('articles',['as' => 'articles_store', 'uses' => 'ArticlesController@store']);
-Route::get('articles/{id}', 'ArticlesController@show');
+
+
+// Route::get('articles', 'ArticlesController@index');
+// Route::get('articles/create', 'ArticlesController@create');
+// Route::post('articles',['as' => 'articles_store', 'uses' => 'ArticlesController@store']);
+// Route::get('articles/{id}', 'ArticlesController@show');
+// Route::get('articles/{id}/edit', 'ArticlesController@edit');
+//EN LUGAR DE PONER LO DE ARRIBA, LO CAMBIO POR UNA SOLA LINEA DE CODIGO
+Route::resource('articles', 'ArticlesController');
+
+
+
+
+
+
+
 // Route::get('/', function () {
 //     return view('welcome');
 // });

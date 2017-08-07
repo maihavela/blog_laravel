@@ -1,11 +1,11 @@
 @extends('app')
 
 @section('content')
-	<h1>Write a New Article</h1>
+	<h1>Edit: {{ $article->title }}</h1>
 	
-	<hr/>
-	
-	{!! Form::open(array('route' => 'articles_store', 'class' => 'form')) !!}
+<!--  	{!! Form::model($article, (['method' => 'PATCH', 'url' => 'articles/' . $article->id])) !!}  -->
+	{!! Form::open(['method' => 'PATCH', 'action' => ['ArticlesController@update', $article->id]]) !!}
+<!--{!! Form::open(['method' => 'PATCH', 'url' => ['ArticlesController@update', $article->id]]) !!} -->
 		<div class="form-group">
 			{!! Form::label('title', 'Title') !!}
 			{!! Form::text('title', null, ['class' => 'form-control']) !!}
