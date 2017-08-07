@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateArticleRequest;
+use App\Http\Requests\ArticleRequest;
 
 class ArticlesController extends Controller
 {
@@ -40,7 +40,7 @@ class ArticlesController extends Controller
 		return view('articles.create');
 	}
 	
-	public function store(CreateArticleRequest $request)
+	public function store(ArticleRequest $request)
 	{
 // 		$input = Request::all(); //me devuelve todo los datos que ingrese
 // 		//si quiere obtener un solo parametro $input = Request::get('title');
@@ -67,7 +67,7 @@ class ArticlesController extends Controller
 		return view('articles.edit', compact('article'));
 	}
 	
-	public function update($id, Request $request)
+	public function update($id, ArticleRequest $request)
 	{
 		$article = Article::findOrFail($id);
 		
