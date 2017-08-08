@@ -6,6 +6,7 @@ use App\Article;
 use App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
 {
@@ -52,6 +53,7 @@ class ArticlesController extends Controller
 		// 		$this->validate($request, ['title' => 'required|min:3',
 		// 								  'body' => 'required',
 		// 								  'published_at' => 'required|date']);
+		//Auth::user();		
 		
 		Article::create($request->all());		
 		
