@@ -10,6 +10,15 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
 {
+	
+	public function __construct(){
+		/**
+		 * auth referencia al auth dentro de 
+		 * Http->Requests->Kernel->$routeMiddleware
+		 * Lo que dice es que quiere disparar el middleware de authenticate
+		 */
+		$this->middleware('auth', ['except' => 'index']); 
+	}
 	public function index()
 	{
 		/*Obtein logged user*/
@@ -41,6 +50,11 @@ class ArticlesController extends Controller
 	
 	public function create()
 	{
+		/*Estableciendo permisos para crear articulo nuevo*/
+/* 		if (Auth::guest()){
+			return redirect('articles');
+		} */
+		
 		return view('articles.create');
 	}
 	
