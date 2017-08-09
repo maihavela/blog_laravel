@@ -33,9 +33,9 @@ class ArticlesController extends Controller
 		return view ('articles.index', compact('articles'));
 	}
 	
-	public function show($id)
+	public function show(Article $article)
 	{
-		$article = Article::findOrFail($id);
+		//$article = Article::findOrFail($id);  No lo busco mas por id, uso route model binding
 		
 		//dd($article->published_at);
 		
@@ -83,16 +83,27 @@ class ArticlesController extends Controller
 		//      ->with('message', 'Thanks for contacting us!');
 	}
 	
-	public function edit($id)
+	/**
+	 * 
+	 * @param Article $article
+	 * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+	 */
+	public function edit(Article $article)
 	{
-		$article = Article::findOrFail($id);
+		//$article = Article::findOrFail($id);
 		
 		return view('articles.edit', compact('article'));
 	}
 	
-	public function update($id, ArticleRequest $request)
+	/**
+	 * 
+	 * @param Article $article
+	 * @param ArticleRequest $request
+	 * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
+	 */
+	public function update(Article $article, ArticleRequest $request)
 	{
-		$article = Article::findOrFail($id);
+		//$article = Article::findOrFail($id);
 		
 		$article->update($request->all());
 		

@@ -55,3 +55,9 @@ COSAS APRENDIDAS
 	7.1 Clean a view. Master page (app.blade) and then every view will extend of it @extends('app'). Dont copy and paste.
 	7.2 A clean form. So, we dont have to write the some code on the views->articles->create and views->articles->edit. We extracted the form from a partial (form.blade.php) and the and every view we inlcuded the diferences, could be the name of the button (@include the partial --> @include ('articles.form') and then the button name (['submitButtonText' => 'Add Article']))
 	7.3 The same thing with the errors.list to show errors completing the form . We extract in a partial and then include it. 
+	
+8. PROVIDERS:
+
+	Building blocks of laravel. Slipt up in a little component that define how to build up or bootstrap that component.
+	Define how to bootstrap a Routing app, the RouteServiceProvider will be a good place.
+	-Model Binding: Instead of receive an ID, now we receive the model (Article). In the previous versions, we set up things inside routeServiceProvider, but now it is not necessary.
