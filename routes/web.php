@@ -20,8 +20,13 @@ Route::get('contact', 'PagesController@contact');
 // Route::get('articles/{id}', 'ArticlesController@show');
 // Route::get('articles/{id}/edit', 'ArticlesController@edit');
 //EN LUGAR DE PONER LO DE ARRIBA, LO CAMBIO POR UNA SOLA LINEA DE CODIGO
+
 Route::resource('articles', 'ArticlesController');
 
+/* Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController'
+]); */
 
 
 
@@ -43,3 +48,7 @@ Route::resource('articles', 'ArticlesController');
  {
  return 'article '.$id;
  }); */
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

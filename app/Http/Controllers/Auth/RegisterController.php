@@ -27,7 +27,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/articles';
 
     /**
      * Create a new controller instance.
@@ -38,8 +38,8 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
     }
-
-    /**
+    
+	    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
@@ -67,5 +67,5 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-    }
+    } 
 }

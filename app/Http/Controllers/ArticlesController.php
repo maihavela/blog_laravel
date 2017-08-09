@@ -12,7 +12,10 @@ class ArticlesController extends Controller
 {
 	public function index()
 	{
-		$articles = Article::all();
+		/*Obtein logged user*/
+		//return \Auth::user()->name;
+		
+		//$articles = Article::all();
 		
 		$articles = Article::latest('published_at')->published()->get();
 		
@@ -53,9 +56,13 @@ class ArticlesController extends Controller
 		// 		$this->validate($request, ['title' => 'required|min:3',
 		// 								  'body' => 'required',
 		// 								  'published_at' => 'required|date']);
-		//Auth::user();		
 		
-		Article::create($request->all());		
+		$article = new Article($request->all());
+		
+		//Auth::user()->articles(); //Con esto obtener a Collection
+		Auth::user()->articles()->save($article);	//user_id => Auth::id()
+		
+		//Article::create($request->all());		
 		
 		return redirect('articles');
 		//return \Redirect::route('contact')
