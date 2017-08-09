@@ -12,7 +12,7 @@ class ArticlesController extends Controller
 {
 	
 	public function __construct(){
-		/**
+		/** 1.MIDDLEWARE
 		 * auth referencia al auth dentro de 
 		 * Http->Requests->Kernel->$routeMiddleware
 		 * Lo que dice es que quiere disparar el middleware de authenticate

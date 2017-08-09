@@ -6,27 +6,39 @@ use Illuminate\Database\Eloquent\Model;
 
 class Article extends Model
 {
+	/********1. prevent from massive assigment******/
 	protected  $fillable = [
 		'title',
 		'body',
 		'published_at',
 		'user_id' //temporary
 	];
-	
-	/*     protected $dates = [
-	 'published_at'
+	/******2. Manejar la fecha como
+	 * articles->created_at->format('Y-m');
+	 */
+	/* protected $dates = [
+		 'published_at'
 	 ]; */
 	
+	/*******3. QUERY SCOPES*******/
 	public function scopePublished($query)
 	{
 		$query->where('published_at', '<=', Carbon::now());
 	}
-	
+	/****OTRA OPCION QUE HACE LO MISMO QUE ARRIBA
+	 * 	public function scopePublished($query, $value)
+	{
+		Article::published($value);
+	}
+	 */
 	public function scopeunPublished($query)
 	{
 		$query->where('published_at', '>', Carbon::now());
 	}
-	
+	/*****
+	 * 
+	 * 4. set +name of the property + the word Attribute
+	 */
 	public function setPublishedAtAttribute($date)
 	{
 		$this->attributes['published_at'] = Carbon::parse($date);
@@ -35,6 +47,10 @@ class Article extends Model
 	 * An article is owned by a user
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
+	
+	/*****5. RELATIONS SHIPS *
+	 * 
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo***/
 	public function user()
 	{
 		return $this->belongsTo('App\User');
