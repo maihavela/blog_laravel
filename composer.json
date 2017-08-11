@@ -10,7 +10,10 @@
         "doctrine/dbal": "^2.5",
         "illuminate/html": "^5.0",
         "laravel/framework": "5.3.*",
-        "laravelcollective/html": "5.3.*"
+        "laravelcollective/html": "5.3.*",
+        "infyomlabs/laravel-generator": "5.4.x-dev",
+   		"laravelcollective/html": "^5.4.0",
+    	"infyomlabs/adminlte-templates": "5.4.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -53,3 +56,4 @@
         "sort-packages": true
     }
 }
+
