@@ -14,6 +14,26 @@ require('laravel-elixir-vue-2');
  */
 
 elixir((mix) => {
-    mix.sass('app.scss')
-       .webpack('app.js');
+//    mix.sass('app.scss')
+//       //.webpack('app.js')
+//       .coffee('module.coffee');
+//    
+//    mix.styles([
+//    	'vendor/normalize.css',
+//    	'app.css'
+//    ], 'public/output/final.css', 'public/css');
+//    
+//    mix.scripts([
+//    	'vendor/jquery.js',
+//    	'main.js',
+//    	'coupon.js'
+//    ], 'public/output/final.css', 'public/js')
+	
+//	mix.phpUnit().phpSpec();
+	
+	mix.sass('app.scss');
+	
+	mix.styles(['vendor/normalize.css', 'app.css'], null, 'public/css');
+	
+	mix.version('public/css/all.css');
 });

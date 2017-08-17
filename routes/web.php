@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/', function(){
+	return 'Home Page';
+});
 
 /* Route::get('about', ['middleware' => 'auth', 'uses' => 'PagesController@about']); */
 /* Route::get('about', ['middleware' => 'auth', function()
@@ -26,7 +29,6 @@ Route::get('contact', 'PagesController@contact');
 // Route::get('articles/{id}', 'ArticlesController@show');
 // Route::get('articles/{id}/edit', 'ArticlesController@edit');
 //EN LUGAR DE PONER LO DE ARRIBA, LO CAMBIO POR UNA SOLA LINEA DE CODIGO
-
 Route::resource('articles', 'ArticlesController');
 
 /* Route::controllers([
