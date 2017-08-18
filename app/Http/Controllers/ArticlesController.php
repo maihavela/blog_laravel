@@ -84,11 +84,26 @@ class ArticlesController extends Controller
 		 * flash = temporary, 1 request
 		 * put = no temp
 		 */
-		\Session::flash('flash_message', 'Your article has been created!');
-		
-		return redirect('articles');
+
+		/***
+		 * \Session::flash('flash_message', 'Your article has been created!');
+		 * Dos formas de hacer session flash message
+		 */
+
+// 		session()->flash('flash_message', 'Your article has been created!');
+// 		session()->flash('flash_message_important', true);
+		// Dos formas de hacer lo mismo
+ 		return redirect('articles')->with([
+ 				'flash_message' => 'Your article has been created!',
+ 				'flash_message_important'=> true
+ 		]);
 		//return \Redirect::route('contact')
 		//      ->with('message', 'Thanks for contacting us!');
+		
+		// \Flash::success() . Es posible usarla de las dos formas flash() o \Flash::
+// 		flash('Your article has been created!')->important();
+		//session()->flash('flash_message', 'Your article has been created!');
+		//return redirect('articles');
 	}
 	
 	/**

@@ -179,6 +179,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+    		
+    	//'Laracasts\Flash\FlashServiceProvider'
 
     ],
 
@@ -231,6 +233,7 @@ return [
     	'Html' => Collective\Html\HtmlFacade::class,
 //     	'Form' => Illuminate\Html\FormFacade::class,
 //  	'Html' => Illuminate\Html\HtmlFacade::class,
+		//'Flash' => 'Laracasts\Flash\Flash'
 
     ],
 
