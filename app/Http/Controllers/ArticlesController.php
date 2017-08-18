@@ -71,12 +71,20 @@ class ArticlesController extends Controller
 		// 								  'body' => 'required',
 		// 								  'published_at' => 'required|date']);
 		
-		$article = new Article($request->all());
+// 		$article = new Article($request->all());
 		
-		//Auth::user()->articles(); //Con esto obtener a Collection
-		Auth::user()->articles()->save($article);	//user_id => Auth::id()
+// 		//Auth::user()->articles(); //Con esto obtener a Collection
+// 		Auth::user()->articles()->save($article);	//user_id => Auth::id()
 		
 		//Article::create($request->all());		
+		
+		Auth::user()->articles()->create($request->all());	
+		
+		/**
+		 * flash = temporary, 1 request
+		 * put = no temp
+		 */
+		\Session::flash('flash_message', 'Your article has been created!');
 		
 		return redirect('articles');
 		//return \Redirect::route('contact')
