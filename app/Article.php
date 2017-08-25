@@ -61,9 +61,14 @@ class Article extends Model
 	 * 
 	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
 	 */
-	
+	/**
+	 * If you want your pivot table to have automatically maintained created_at and updated_at timestamps, 
+	 * use the withTimestamps method on the relationship definition:
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
 	public function tags()
 	{
-		return $this->belongsToMany('App\Tag');
+		return $this->belongsToMany('App\Tag', 'tag_id', 'article_id', 'article_tag')->withTimestamps(); 
+		
 	}
 }

@@ -13,13 +13,16 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tags', function (Blueprint $table) {
+    	Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
         });
         
         //pivot table
+        /**
+         * Pivot table is an example of intermediate table with relationships between two other “main” tables.
+         */
         Schema::create('article_tag', function (Blueprint $table) {
         	$table->integer('article_id')->unsigned()->index();
         	$table->foreign('article_id')->references('id')->on('articles')->onDelete('cascade');
@@ -42,3 +45,4 @@ class CreateTagsTable extends Migration
         Schema::dropIfExists('article_tag');
     }
 }
+
