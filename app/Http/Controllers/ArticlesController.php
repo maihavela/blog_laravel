@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Tag;
 use App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\ArticleRequest;
@@ -54,12 +55,16 @@ class ArticlesController extends Controller
 /* 		if (Auth::guest()){
 			return redirect('articles');
 		} */
+		$tags = Tag::pluck('name', 'id')->all();
 		
-		return view('articles.create');
+		return view('articles.create', compact('tags'));
 	}
 	
 	public function store(ArticleRequest $request)
 	{
+		//dd($request->input('tags'));
+
+		//$articles->tags()->attach([1, 2, 3, 4]);
 // 		$input = Request::all(); //me devuelve todo los datos que ingrese
 // 		//si quiere obtener un solo parametro $input = Request::get('title');
 		
@@ -77,9 +82,12 @@ class ArticlesController extends Controller
 // 		Auth::user()->articles()->save($article);	//user_id => Auth::id()
 		
 		//Article::create($request->all());		
-		
-		Auth::user()->articles()->create($request->all());	
-		
+
+			
+		//$tagIds = $request->input('tags');
+		//dd('Tags', $tagIds);
+		$article = Auth::user()->articles()->create($request->all());
+		$article->tags()->attach($request->input('tags'));
 		/**
 		 * flash = temporary, 1 request
 		 * put = no temp

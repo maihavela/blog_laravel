@@ -18,5 +18,10 @@
 <!-- </div>	 -->
 
 <div class="form-group">
+	{!! Form::label('tags', 'Tags:') !!}
+	{!! Form::select('tags[]', $tags, null, ['class' => 'form-control', 'multiple']) !!}
+</div>
+
+<div class="form-group">
 	{!! Form::submit($submitButtonText, ['class' => 'btn btn-primary form-control']) !!}
 </div>	
