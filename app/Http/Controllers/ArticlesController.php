@@ -87,7 +87,8 @@ class ArticlesController extends Controller
 		//$tagIds = $request->input('tags');
 		//dd('Tags', $tagIds);
 		$article = Auth::user()->articles()->create($request->all());
-		$article->tags()->attach($request->input('tags'));
+		
+		$article->tags()->attach($request->input('tag_list'));
 		/**
 		 * flash = temporary, 1 request
 		 * put = no temp
@@ -122,8 +123,9 @@ class ArticlesController extends Controller
 	public function edit(Article $article)
 	{
 		//$article = Article::findOrFail($id);
+		$tags = Tag::pluck('name', 'id')->all();
 		
-		return view('articles.edit', compact('article'));
+		return view('articles.edit', compact('article', 'tags'));
 	}
 	
 	/**

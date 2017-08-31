@@ -71,4 +71,13 @@ class Article extends Model
 		return $this->belongsToMany('App\Tag')->withTimestamps(); 
 		
 	}
+	/**
+	 * Get a list of tag ids associated with the current article
+	 * return array
+	 */
+	
+	public function getTagListAttribute()
+	{
+		return $this->tags->pluck('id');
+	}
 }
