@@ -11,7 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
 {
-	
+	/**
+	 * Create a new article controller instance.
+	 */
 	public function __construct(){
 		/** 1.MIDDLEWARE
 		 * auth referencia al auth dentro de 
@@ -26,12 +28,15 @@ class ArticlesController extends Controller
 		//return \Auth::user()->name;
 		
 		//$articles = Article::all();
-		
+		/**
+		 * fetch the latest articles
+		 * @var unknown $articles
+		 */
 		$articles = Article::latest('published_at')->published()->get();
 		
 		//$articles = Article::latest()->get();
 		
-		return view ('articles.index', compact('articles'));
+		return view('articles.index', compact('articles'));
 	}
 	
 	public function show(Article $article)
@@ -55,6 +60,11 @@ class ArticlesController extends Controller
 /* 		if (Auth::guest()){
 			return redirect('articles');
 		} */
+		
+		/**
+		 * Select tags for the dropdown menu
+		 * @var unknown $tags
+		 */
 		$tags = Tag::pluck('name', 'id')->all();
 		
 		return view('articles.create', compact('tags'));
@@ -83,12 +93,15 @@ class ArticlesController extends Controller
 		
 		//Article::create($request->all());		
 
-			
+		$this->createArticle($request);
 		//$tagIds = $request->input('tags');
 		//dd('Tags', $tagIds);
-		$article = Auth::user()->articles()->create($request->all());
 		
-		$article->tags()->attach($request->input('tag_list'));
+		
+		//attach: add new rows
+		//detach: remove row
+		//sync: 
+		
 		/**
 		 * flash = temporary, 1 request
 		 * put = no temp
@@ -99,8 +112,8 @@ class ArticlesController extends Controller
 		 * Dos formas de hacer session flash message
 		 */
 
-// 		session()->flash('flash_message', 'Your article has been created!');
-// 		session()->flash('flash_message_important', true);
+		//session()->flash('flash_message', 'Your article has been created!');
+		//session()->flash('flash_message_important', true);
 		// Dos formas de hacer lo mismo
  		return redirect('articles')->with([
  				'flash_message' => 'Your article has been created!',
@@ -110,7 +123,7 @@ class ArticlesController extends Controller
 		//      ->with('message', 'Thanks for contacting us!');
 		
 		// \Flash::success() . Es posible usarla de las dos formas flash() o \Flash::
-// 		flash('Your article has been created!')->important();
+		//flash('Your article has been created!')->important();
 		//session()->flash('flash_message', 'Your article has been created!');
 		//return redirect('articles');
 	}
@@ -131,17 +144,40 @@ class ArticlesController extends Controller
 	/**
 	 * 
 	 * @param Article $article
-	 * @param ArticleRequest $request
+	 * @param ArticleRequest $request = is to validate 
 	 * @return \Illuminate\Routing\Redirector|\Illuminate\Http\RedirectResponse
 	 */
-	public function update(Article $article, ArticleRequest $request)
+	
+	public function update(ArticleRequest $request, Article $article)
 	{
 		//$article = Article::findOrFail($id);
 		
 		$article->update($request->all());
 		
-		$article->tags()->attach($request->input('tag_list'));
+		$article->syncTags($request->input('tag_list'));
 				
 		return redirect('articles');
+	}
+	
+	/**
+	 * Sync up the list of tags in the database.
+	 */
+	private function syncTags(Article $article, array $tags)
+	{
+		$article->tags()->sync($tags);
+	}
+	
+	/***
+	 * Create and persist a new article.
+	 * @param ArticleRequest $request
+	 * @return unknown
+	 */
+	private function createArticle(ArticleRequest $request)
+	{
+		$article = Auth::user()->articles()->create($request->all());
+		
+		$this->syncTags($article, $request->input('tag_list'));
+		
+		return $article;
 	}
 }
