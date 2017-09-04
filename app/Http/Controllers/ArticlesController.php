@@ -34,9 +34,11 @@ class ArticlesController extends Controller
 		 */
 		$articles = Article::latest('published_at')->published()->get();
 		
+		$latest = Article::latest()->first();
+		
 		//$articles = Article::latest()->get();
 		
-		return view('articles.index', compact('articles'));
+		return view('articles.index', compact('articles', 'latest'));
 	}
 	
 	public function show(Article $article)
@@ -138,6 +140,7 @@ class ArticlesController extends Controller
 		//$article = Article::findOrFail($id);
 		$tags = Tag::pluck('name', 'id')->all();
 		
+		
 		return view('articles.edit', compact('article', 'tags'));
 	}
 	
@@ -181,3 +184,6 @@ class ArticlesController extends Controller
 		return $article;
 	}
 }
+
+/***
+ * fetch the same data to pass to every single view
