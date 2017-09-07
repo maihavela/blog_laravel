@@ -1,9 +1,9 @@
-<?php
-
+<?php 
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+// Your own application, as well as all of Laravel's core services are bootstrapped via service providers.
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -13,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+
     }
 
     /**
@@ -23,6 +23,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+        	'Illuminate\Contracts\Auth\Registrar',
+        	'App\Services\Registrar'
+        );
     }
 }
